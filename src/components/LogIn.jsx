@@ -6,7 +6,7 @@ function LogIn() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState("");
 
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ function LogIn() {
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
-    setErrors(null);
+    setErrors("");
 
     try {
       const response = await fetch("http://localhost:3000/log-in", {
@@ -26,14 +26,19 @@ function LogIn() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "login failed");
+        const errorMessage =
+          data?.errors?.errors?.[0]?.msg || data?.message || "login failed";
+
+        throw new Error(errorMessage);
       }
 
       login(data.token, data.user);
 
       navigate("/chat");
     } catch (error) {
-      setErrors(error);
+      setErrors(error.message);
+    } finally {
+      setLoading(false);
     }
   }
   return (
@@ -64,7 +69,7 @@ function LogIn() {
           }}
         />
 
-        {errors}
+        {errors && <div>errors: {errors}</div>}
 
         <button type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
