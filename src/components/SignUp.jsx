@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -9,7 +10,38 @@ function SignUp() {
   const [errors, setErrors] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function handleSubmit() {}
+  const navigate = useNavigate();
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setLoading(true);
+    setErrors("");
+
+    try {
+      const response = await fetch("http://localhost:3000/sign-up", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, username, password, confirmPassword }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        const errorMessage =
+          data?.errors?.errors?.[0]?.msg || data?.message || "signup failed";
+
+        throw new Error(errorMessage);
+      }
+
+      navigate("/login");
+    } catch (error) {
+      setErrors(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div>
@@ -74,7 +106,7 @@ function SignUp() {
         {errors && <div>errors: {errors}</div>}
 
         <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
+          {loading ? "Signing up..." : "Sign up"}
         </button>
       </form>
     </div>
