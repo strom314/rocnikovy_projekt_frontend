@@ -1,7 +1,7 @@
 import { useAuth } from "../context/AuthContext";
 
 function Header() {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   function handleLogout() {
     logout();
@@ -11,7 +11,7 @@ function Header() {
     <div>
       <h1>my messenger</h1>
       <div>
-        <p>profile</p>
+        <p>{user.username}</p>
         <p>picture</p>
         <button onClick={handleLogout}>log out</button>
       </div>
