@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LogIn from "./components/LogIn";
-import SignUp from "./components/SignUp";
-import Chat from "./components/Chat";
-import ProtectedRoute from "./components/ProtectedRoute";
+import LogIn from "./components/auth/LogIn";
+import SignUp from "./components/auth/SignUp";
+import Chat from "./components/ChatWindow";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   return (
