@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
-function Sidebar() {
+function Sidebar({ onSelectConversation }) {
   const { token, user } = useAuth();
 
   const [conversations, setConversations] = useState([]);
@@ -34,10 +34,11 @@ function Sidebar() {
     }
 
     loadConversations();
-  }, []);
+  }, [token]);
 
   return (
     <div>
+      <h1>sidebar</h1>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
@@ -46,7 +47,11 @@ function Sidebar() {
           const [first, second] = conversation.participants;
           const other = first.userId === user.id ? second.user : first.user;
 
-          return <li key={conversation.id}>chat with {other.username}</li>;
+          return (
+            <li key={conversation.id} onClick={onSelectConversation}>
+              chat with {other.username}
+            </li>
+          );
         })}
       </ul>
     </div>
