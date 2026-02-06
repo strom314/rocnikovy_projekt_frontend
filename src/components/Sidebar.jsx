@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import PeopleSearch from "./PeopleSearch";
 
 function Sidebar({ onSelectConversation }) {
   const { token, user } = useAuth();
@@ -48,12 +49,19 @@ function Sidebar({ onSelectConversation }) {
           const other = first.userId === user.id ? second.user : first.user;
 
           return (
-            <li key={conversation.id} onClick={onSelectConversation}>
+            <li
+              key={conversation.id}
+              onClick={() => {
+                onSelectConversation(conversation.id);
+              }}
+            >
               chat with {other.username}
             </li>
           );
         })}
       </ul>
+
+      <PeopleSearch onSelectConversation={onSelectConversation} />
     </div>
   );
 }
