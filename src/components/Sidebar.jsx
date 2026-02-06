@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import PeopleSearch from "./PeopleSearch";
 
-function Sidebar({ onSelectConversation }) {
+function Sidebar({ onSelectConversation, selectedConversationId }) {
   const { token, user } = useAuth();
 
   const [conversations, setConversations] = useState([]);
@@ -35,7 +35,7 @@ function Sidebar({ onSelectConversation }) {
     }
 
     loadConversations();
-  }, [token]);
+  }, [token, selectedConversationId]);
 
   return (
     <div>

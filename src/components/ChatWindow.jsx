@@ -16,7 +16,10 @@ function Chat() {
   return (
     <div>
       <Header />
-      <Sidebar onSelectConversation={onSelectConversation} />
+      <Sidebar
+        onSelectConversation={onSelectConversation}
+        selectedConversationId={selectedConversationId}
+      />
       <MessageList selectedConversationId={selectedConversationId} />
 
       <div>debug info</div>
