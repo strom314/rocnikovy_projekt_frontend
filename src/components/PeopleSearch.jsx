@@ -15,11 +15,11 @@ function useDebouncedValue(value, delayMs) {
   return debouncedValue;
 }
 
-function PeopleSearch() {
+function PeopleSearch({ onSelectConversation }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
-  const { token } = useAuth();
+  const { token, user } = useAuth();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -79,7 +79,40 @@ function PeopleSearch() {
     return () => {
       cancelled = true;
     };
-  }, [debouncedQuery]);
+  }, [debouncedQuery, token]);
+
+  async function onCreateConversation(otherId) {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await fetch("http://localhost:3000/conversation", {
+        method: "POST",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          participantIds: [otherId, user.id],
+          isGroup: false,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("failed to create conversation");
+      }
+
+      const data = await response.json();
+
+      onSelectConversation(data.id);
+      setQuery("");
+      setResults([]);
+    } catch (error) {
+      setError(error?.message ?? "Failed to create conversation");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div>
@@ -88,7 +121,14 @@ function PeopleSearch() {
       {error && <p>{error}</p>}
       <ul>
         {results.map((user) => (
-          <li key={user.id}>{user.username}</li>
+          <li
+            key={user.id}
+            onClick={() => {
+              onCreateConversation(user.id);
+            }}
+          >
+            {user.username}
+          </li>
         ))}
       </ul>
     </div>
