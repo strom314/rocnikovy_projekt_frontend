@@ -1,4 +1,5 @@
 import { useAuth } from "../context/AuthContext";
+import styles from "./header.module.css";
 
 function Header() {
   const { logout, user } = useAuth();
@@ -8,12 +9,14 @@ function Header() {
   }
 
   return (
-    <div>
-      <h1>my messenger</h1>
-      <div>
-        <p>{user.username}</p>
+    <div className={styles.header}>
+      <h1 className={styles.appTitle}>my messenger</h1>
+      <div className={styles.userContainer}>
+        <p className={styles.username}>{user.username}</p>
         <p>picture</p>
-        <button onClick={handleLogout}>log out</button>
+        <button className={styles.logoutButton} onClick={handleLogout}>
+          log out
+        </button>
       </div>
     </div>
   );
