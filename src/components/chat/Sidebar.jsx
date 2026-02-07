@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import PeopleSearch from "./PeopleSearch";
+import styles from "./sidebar.module.css";
 
 function Sidebar({ onSelectConversation, selectedConversationId }) {
   const { token, user } = useAuth();
@@ -43,13 +44,19 @@ function Sidebar({ onSelectConversation, selectedConversationId }) {
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
-      <ul>
+      <ul className={styles.chatList}>
         {conversations.map((conversation) => {
           const [first, second] = conversation.participants;
           const other = first.userId === user.id ? second.user : first.user;
 
           return (
             <li
+              className={[
+                styles.chat,
+                conversation.id === selectedConversationId
+                  ? styles.selected
+                  : "",
+              ].join(" ")}
               key={conversation.id}
               onClick={() => {
                 onSelectConversation(conversation.id);

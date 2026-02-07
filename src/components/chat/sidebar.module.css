@@ -1,0 +1,10 @@
+.chatList {
+  padding: 0;
+  overflow: auto;
+}
+.chat {
+  list-style: none;
+}
+.selected {
+  background-color: aqua;
+}
