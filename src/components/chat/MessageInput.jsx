@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 function MessageInput({ selectedConversationId, fetchMessages }) {
   const { token } = useAuth();

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import Header from "./Header";
-import Sidebar from "./Sidebar";
-import MessageList from "./MessageList";
+import Sidebar from "./chat/Sidebar";
+import MessageList from "./chat/MessageList";
 
 function Chat() {
   const { user, token } = useAuth();
