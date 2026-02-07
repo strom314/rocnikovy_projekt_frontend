@@ -1,0 +1,21 @@
+.messageWindow {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.messageDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  padding: 0;
+}
+.message {
+  border: solid blueviolet 1px;
+  list-style-type: none;
+}
+.right {
+  align-self: flex-end;
+}

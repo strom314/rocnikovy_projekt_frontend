@@ -1,9 +1,28 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import MessageInput from "./MessageInput";
+import styles from "./messageList.module.css";
+
+function formatMessageDate(value) {
+  if (!value) {
+    return "";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return String(value);
+  }
+
+  return date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
 
 function MessageList({ selectedConversationId }) {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -48,16 +67,25 @@ function MessageList({ selectedConversationId }) {
   }, [selectedConversationId, token]);
 
   return (
-    <div>
-      <h1>message list</h1>
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-
-      <ul>
-        {messages.map((message) => (
-          <li key={message.id}>{message.content}</li>
-        ))}
-      </ul>
+    <div className={styles.messageWindow}>
+      <div>
+        <h1>message list</h1>
+        {loading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+        <ul className={styles.messageDisplay}>
+          {messages.map((message) => (
+            <li
+              className={[
+                styles.message,
+                message.senderId === user.id ? styles.right : "",
+              ].join(" ")}
+              key={message.id}
+            >
+              {formatMessageDate(message.createdAt)} : {message.content}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div>
         <MessageInput
