@@ -4,6 +4,7 @@ import LogIn from "./components/auth/LogIn";
 import SignUp from "./components/auth/SignUp";
 import Chat from "./components/ChatWindow";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import "./components/app.module.css";
 
 function App() {
   return (
