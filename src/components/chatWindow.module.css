@@ -1,0 +1,30 @@
+div {
+  border: solid black 1px;
+}
+
+:global(html, body, #root) {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  display: grid;
+  grid-template-rows: 1fr 10fr;
+  grid-template-columns: 1fr 2fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header {
+  grid-column: 1/3;
+  grid-row: 1/2;
+}
+
+.sidebar {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.messageList {
+}
