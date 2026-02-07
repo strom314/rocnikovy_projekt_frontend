@@ -22,6 +22,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route path="*" element={<Navigate to={"/chat"} replace />} />
       </Routes>
     </BrowserRouter>
   );
