@@ -8,3 +8,15 @@
 .selected {
   background-color: aqua;
 }
+
+.sidebarSplit {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatListHalf {
+  flex: 1;
+}
+.searchListHalf {
+  height: 50%;
+}

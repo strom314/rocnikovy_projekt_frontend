@@ -41,41 +41,45 @@ function Sidebar({ onSelectConversation, selectedConversationId }) {
   }, [token, selectedConversationId]);
 
   return (
-    <div>
-      <h1>sidebar</h1>
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+    <>
+      <div className={styles.sidebarSplit}>
+        <div className={styles.chatListHalf}>
+          <h1>sidebar</h1>
+          {loading && <p>Loading...</p>}
+          {error && <p>{error}</p>}
+          <ul className={styles.chatList}>
+            {conversations.map((conversation) => {
+              const [first, second] = conversation.participants;
+              const other = first.userId === user.id ? second.user : first.user;
+              return (
+                <li
+                  className={[
+                    styles.chat,
+                    conversation.id === selectedConversationId
+                      ? styles.selected
+                      : "",
+                  ].join(" ")}
+                  key={conversation.id}
+                  onClick={() => {
+                    onSelectConversation(conversation.id);
+                  }}
+                >
+                  chat with {other.username}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
-      <ul className={styles.chatList}>
-        {conversations.map((conversation) => {
-          const [first, second] = conversation.participants;
-          const other = first.userId === user.id ? second.user : first.user;
-
-          return (
-            <li
-              className={[
-                styles.chat,
-                conversation.id === selectedConversationId
-                  ? styles.selected
-                  : "",
-              ].join(" ")}
-              key={conversation.id}
-              onClick={() => {
-                onSelectConversation(conversation.id);
-              }}
-            >
-              chat with {other.username}
-            </li>
-          );
-        })}
-      </ul>
-
-      {isSearching && (
-        <PeopleSearch
-          onSelectConversation={onSelectConversation}
-          setIsSearching={setIsSearching}
-        />
-      )}
+        <div className={styles.searchListHalf}>
+          {isSearching && (
+            <PeopleSearch
+              onSelectConversation={onSelectConversation}
+              setIsSearching={setIsSearching}
+            />
+          )}
+        </div>
+      </div>
 
       <button
         onClick={() => {
@@ -84,7 +88,7 @@ function Sidebar({ onSelectConversation, selectedConversationId }) {
       >
         find people
       </button>
-    </div>
+    </>
   );
 }
 
