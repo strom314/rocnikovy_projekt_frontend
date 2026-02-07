@@ -10,6 +10,8 @@ function Sidebar({ onSelectConversation, selectedConversationId }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [isSearching, setIsSearching] = useState(false);
+
   useEffect(() => {
     async function loadConversations() {
       setLoading(true);
@@ -68,7 +70,20 @@ function Sidebar({ onSelectConversation, selectedConversationId }) {
         })}
       </ul>
 
-      <PeopleSearch onSelectConversation={onSelectConversation} />
+      {isSearching && (
+        <PeopleSearch
+          onSelectConversation={onSelectConversation}
+          setIsSearching={setIsSearching}
+        />
+      )}
+
+      <button
+        onClick={() => {
+          setIsSearching(!isSearching);
+        }}
+      >
+        find people
+      </button>
     </div>
   );
 }

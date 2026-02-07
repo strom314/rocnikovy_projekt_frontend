@@ -15,7 +15,7 @@ function useDebouncedValue(value, delayMs) {
   return debouncedValue;
 }
 
-function PeopleSearch({ onSelectConversation }) {
+function PeopleSearch({ onSelectConversation, setIsSearching }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
@@ -105,6 +105,7 @@ function PeopleSearch({ onSelectConversation }) {
       const data = await response.json();
 
       onSelectConversation(data.id);
+      setIsSearching(false);
       setQuery("");
       setResults([]);
     } catch (error) {
