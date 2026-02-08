@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import MessageInput from "./MessageInput";
 import styles from "./messageList.module.css";
@@ -28,6 +28,19 @@ function MessageList({ selectedConversationId }) {
   const [error, setError] = useState(null);
 
   const [messages, setMessages] = useState([]);
+
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      const { scrollHeight, clientHeight } = scrollRef.current;
+
+      scrollRef.current.scrollTo({
+        top: scrollHeight - clientHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
 
   async function fetchMessages() {
     try {
@@ -63,29 +76,27 @@ function MessageList({ selectedConversationId }) {
       return;
     }
 
+    setError(null);
     fetchMessages();
   }, [selectedConversationId, token]);
 
   return (
     <div className={styles.messageWindow}>
-      <div>
-        <h1>message list</h1>
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-        <ul className={styles.messageDisplay}>
-          {messages.map((message) => (
-            <li
-              className={[
-                styles.message,
-                message.senderId === user.id ? styles.right : "",
-              ].join(" ")}
-              key={message.id}
-            >
-              {formatMessageDate(message.createdAt)} : {message.content}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {error && <p>{error}</p>}
+      <ul className={styles.messageDisplay} ref={scrollRef}>
+        {messages.map((message) => (
+          <li
+            className={[
+              styles.message,
+              message.senderId === user.id ? styles.right : "",
+            ].join(" ")}
+            key={message.id}
+          >
+            {formatMessageDate(message.createdAt)} : {message.content}
+          </li>
+        ))}
+        {loading && messages.length === 0 && <li>Loading...</li>}
+      </ul>
 
       <div>
         <MessageInput
