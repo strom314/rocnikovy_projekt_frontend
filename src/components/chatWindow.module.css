@@ -32,4 +32,6 @@ div {
   grid-row: 2/3;
   grid-column: 2/3;
   height: 100%;
+
+  min-height: 0;
 }
