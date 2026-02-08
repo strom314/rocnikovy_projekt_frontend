@@ -30,16 +30,14 @@ function MessageList({ selectedConversationId }) {
   const [messages, setMessages] = useState([]);
 
   const scrollRef = useRef(null);
+  const shouldScrollDownRef = useRef(false);
 
   //auto scrolling when user sends a message
   useEffect(() => {
-    if (scrollRef.current) {
-      const { scrollHeight, clientHeight } = scrollRef.current;
-
-      scrollRef.current.scrollTo({
-        top: scrollHeight - clientHeight,
-        behavior: "smooth",
-      });
+    if (shouldScrollDownRef.current) {
+      scrollDown();
+    } else {
+      handleAutoScroll();
     }
   }, [messages]);
 
@@ -74,6 +72,7 @@ function MessageList({ selectedConversationId }) {
     }
   }
 
+  //fetching messages
   useEffect(() => {
     if (!selectedConversationId) {
       setMessages([]);
@@ -82,6 +81,7 @@ function MessageList({ selectedConversationId }) {
     }
 
     setError(null);
+    shouldScrollDownRef.current = true;
 
     //initial fetch
     fetchMessages(false);
@@ -94,6 +94,33 @@ function MessageList({ selectedConversationId }) {
     //cleanup interval
     return () => clearInterval(intervalId);
   }, [selectedConversationId, token]);
+
+  function handleAutoScroll() {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const threshold = 100;
+    const isAtBottom =
+      container.scrollHeight - container.scrollTop <=
+      container.clientHeight + threshold;
+
+    if (isAtBottom) {
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }
+  function scrollDown() {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: "instant",
+    });
+    shouldScrollDownRef.current = false;
+  }
 
   return (
     <div className={styles.messageWindow}>
