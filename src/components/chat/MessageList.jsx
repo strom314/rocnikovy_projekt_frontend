@@ -31,6 +31,7 @@ function MessageList({ selectedConversationId }) {
 
   const scrollRef = useRef(null);
 
+  //auto scrolling when user sends a message
   useEffect(() => {
     if (scrollRef.current) {
       const { scrollHeight, clientHeight } = scrollRef.current;
@@ -42,9 +43,11 @@ function MessageList({ selectedConversationId }) {
     }
   }, [messages]);
 
-  async function fetchMessages() {
+  async function fetchMessages(isPolling = false) {
     try {
-      setLoading(true);
+      if (!isPolling) {
+        setLoading(true);
+      }
 
       const response = await fetch(
         `http://localhost:3000/conversation/${selectedConversationId}/messages`,
@@ -65,7 +68,9 @@ function MessageList({ selectedConversationId }) {
     } catch (error) {
       setError(error?.message ?? "Failed to fetch messages");
     } finally {
-      setLoading(false);
+      if (!isPolling) {
+        setLoading(false);
+      }
     }
   }
 
@@ -77,7 +82,17 @@ function MessageList({ selectedConversationId }) {
     }
 
     setError(null);
-    fetchMessages();
+
+    //initial fetch
+    fetchMessages(false);
+
+    //polling
+    const intervalId = setInterval(() => {
+      fetchMessages(true);
+    }, 2000);
+
+    //cleanup interval
+    return () => clearInterval(intervalId);
   }, [selectedConversationId, token]);
 
   return (
@@ -101,7 +116,7 @@ function MessageList({ selectedConversationId }) {
       <div>
         <MessageInput
           selectedConversationId={selectedConversationId}
-          fetchMessages={fetchMessages}
+          fetchMessages={() => fetchMessages(true)}
         />
       </div>
     </div>
