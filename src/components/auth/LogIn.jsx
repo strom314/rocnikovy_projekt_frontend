@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
+import { Link } from "react-router-dom";
 
 function LogIn() {
   const [password, setPassword] = useState("");
@@ -75,13 +76,13 @@ function LogIn() {
             />
           </div>
 
-          {errors && <div className={styles.errorText}>errors: {errors}</div>}
+          {errors && <div className={styles.errorText}>{errors}</div>}
 
           <button type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </button>
           <div className={styles.signupLink}>
-            don't have an account? <a href="/signup">sign up</a>
+            don't have an account? <Link to={"/signup"}>sign up</Link>
           </div>
         </form>
       </div>

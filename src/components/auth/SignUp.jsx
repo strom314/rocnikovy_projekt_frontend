@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
+import { Link } from "react-router-dom";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -113,7 +114,7 @@ function SignUp() {
         </form>
 
         <div className={styles.signupLink}>
-          Already have an account? <a href="/login">Log in</a>
+          Already have an account? <Link to={"/login"}>Log in</Link>
         </div>
       </div>
     </div>
