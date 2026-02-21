@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import styles from "./login.module.css";
 
 function LogIn() {
   const [password, setPassword] = useState("");
@@ -42,39 +43,48 @@ function LogIn() {
     }
   }
   return (
-    <div>
-      <h1>log in</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
+    <div className={styles.loginPage}>
+      <div className={styles.loginCard}>
+        <h1>Log in</h1>
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
+          <div className={styles.fieldGroup}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </div>
 
-        <label htmlFor="password">password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          required
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
+          <div className={styles.fieldGroup}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </div>
 
-        {errors && <div>errors: {errors}</div>}
+          {errors && <div className={styles.errorText}>errors: {errors}</div>}
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+          <div className={styles.signupLink}>
+            don't have an account? <a href="/signup">sign up</a>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

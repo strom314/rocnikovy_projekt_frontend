@@ -1,6 +1,6 @@
-div {
+/* div {
   border: solid black 1px;
-}
+} */
 
 :global(html, body, #root) {
   height: 100%;

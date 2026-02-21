@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./login.module.css";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -44,71 +45,77 @@ function SignUp() {
   }
 
   return (
-    <div>
-      <h1>sign up</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            required
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
+    <div className={styles.loginPage}>
+      <div className={styles.loginCard}>
+        <h1>Sign up</h1>
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
+          <div className={styles.fieldGroup}>
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+            />
+          </div>
+
+          <div className={styles.fieldGroup}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </div>
+
+          <div className={styles.fieldGroup}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </div>
+
+          <div className={styles.fieldGroup}>
+            <label htmlFor="confirmPassword">Confirm password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              required
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+              }}
+            />
+          </div>
+
+          {errors && <div className={styles.errorText}>{errors}</div>}
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Signing up..." : "Sign up"}
+          </button>
+        </form>
+
+        <div className={styles.signupLink}>
+          Already have an account? <a href="/login">Log in</a>
         </div>
-
-        <div>
-          <label htmlFor="email">email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="password">password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="confirmPassword">confirm password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            required
-            value={confirmPassword}
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-            }}
-          />
-        </div>
-
-        {errors && <div>errors: {errors}</div>}
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Signing up..." : "Sign up"}
-        </button>
-      </form>
+      </div>
     </div>
   );
 }

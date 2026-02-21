@@ -1,0 +1,81 @@
+:root {
+  --ebony: hsla(145, 6%, 41%, 1);
+  --hunter-green: hsla(99, 19%, 27%, 1);
+  --evergreen: hsla(111, 21%, 18%, 1);
+  --pale-sky: hsla(195, 19%, 79%, 1);
+  --cool-steel: rgb(184, 194, 199);
+  --grey: hsla(185, 6%, 45%, 1);
+  --grey-2: hsla(193, 6%, 51%, 1);
+}
+
+h1 {
+  font-size: 2rem;
+}
+label {
+  font-size: 1.1rem;
+}
+input {
+  padding: 10px;
+  border-radius: 8px;
+
+  border: solid var(--evergreen) 2px;
+  background-color: hsla(185, 6%, 45%, 0.6);
+
+  color: var(--pale-sky);
+  font-size: 1.1rem;
+}
+input :autofill {
+  background-color: hsla(185, 6%, 45%, 0.6);
+}
+
+button {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  color: var(--pale-sky);
+  background-color: var(--hunter-green);
+  border: solid 2px var(--evergreen);
+}
+
+.loginPage {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../../assets/forest_mist.png");
+  background-size: cover;
+  background-position: center;
+
+  color: var(--cool-steel);
+}
+
+.loginCard {
+  width: min(420px, 100%);
+  padding: 38px;
+  background: hsla(185, 6%, 45%, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  border: hsla(185, 6%, 45%, 0.3) solid 2px;
+}
+
+.loginForm {
+  display: grid;
+  gap: 16px;
+}
+
+.fieldGroup {
+  display: grid;
+  gap: 8px;
+}
+
+.errorText {
+  color: #6c0014;
+}
+
+.signupLink {
+  text-align: center;
+  margin-top: 10px;
+}
