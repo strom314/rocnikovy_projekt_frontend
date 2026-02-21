@@ -46,7 +46,7 @@ function Sidebar({ onSelectConversation, selectedConversationId }) {
         <div className={styles.chatListHalf}>
           <h1>Chats</h1>
 
-          {loading && <p>Loading...</p>}
+          {!conversations && loading && <p>Loading...</p>}
           {error && <p>{error}</p>}
 
           <ul className={styles.chatList}>
