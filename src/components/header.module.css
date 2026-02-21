@@ -5,13 +5,19 @@
 }
 .userContainer {
   display: flex;
+  align-items: baseline;
+  gap: 20px;
 }
 
 .appTitle {
 }
 
 .username {
+  font-size: 1.2rem;
 }
-
 .logoutButton {
+  transition: 0.2s;
+}
+.logoutButton:hover {
+  scale: 1.1;
 }

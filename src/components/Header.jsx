@@ -13,7 +13,7 @@ function Header() {
       <h1 className={styles.appTitle}>Stromus chatus</h1>
       <div className={styles.userContainer}>
         <p className={styles.username}>{user.username}</p>
-        <p>picture</p>
+        <p>profile picture</p>
         <button className={styles.logoutButton} onClick={handleLogout}>
           log out
         </button>
