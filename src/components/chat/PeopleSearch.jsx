@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import styles from "./peopleSearch.module.css";
 
 function useDebouncedValue(value, delayMs) {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -117,12 +118,21 @@ function PeopleSearch({ onSelectConversation, setIsSearching }) {
 
   return (
     <div>
-      <input type="text" value={query} onInput={onInputChange} />
+      <input
+        className={styles.searchBar}
+        type="text"
+        value={query}
+        onInput={onInputChange}
+        placeholder="enter username"
+      />
+
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
+
       <ul>
         {results.map((user) => (
           <li
+            className={styles.searchItem}
             key={user.id}
             onClick={() => {
               onCreateConversation(user.id);

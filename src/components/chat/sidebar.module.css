@@ -4,9 +4,17 @@
 }
 .chat {
   list-style: none;
+  margin-bottom: 5px;
+
+  border: solid 2px var(--hunter-green);
+  border-radius: 6px;
+  padding: 5px 10px;
+  background-color: var(--hunter-green);
+  color: var(--pale-sky);
 }
 .selected {
-  background-color: aqua;
+  border: solid 2px var(--hunter-green);
+  background-color: rgb(42, 59, 39);
 }
 
 .sidebarSplit {
@@ -19,4 +27,8 @@
 }
 .searchListHalf {
   height: 50%;
+}
+
+.findButton {
+  width: 100%;
 }

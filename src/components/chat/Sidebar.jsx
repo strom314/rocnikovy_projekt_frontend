@@ -44,9 +44,11 @@ function Sidebar({ onSelectConversation, selectedConversationId }) {
     <>
       <div className={styles.sidebarSplit}>
         <div className={styles.chatListHalf}>
-          <h1>sidebar</h1>
+          <h1>Chats</h1>
+
           {loading && <p>Loading...</p>}
           {error && <p>{error}</p>}
+
           <ul className={styles.chatList}>
             {conversations.map((conversation) => {
               const [first, second] = conversation.participants;
@@ -64,7 +66,7 @@ function Sidebar({ onSelectConversation, selectedConversationId }) {
                     onSelectConversation(conversation.id);
                   }}
                 >
-                  chat with {other.username}
+                  {other.username}
                 </li>
               );
             })}
@@ -82,6 +84,7 @@ function Sidebar({ onSelectConversation, selectedConversationId }) {
       </div>
 
       <button
+        className={styles.findButton}
         onClick={() => {
           setIsSearching(!isSearching);
         }}

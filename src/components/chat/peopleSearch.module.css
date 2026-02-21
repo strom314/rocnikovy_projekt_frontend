@@ -1,0 +1,17 @@
+.searchBar::placeholder {
+  color: var(--grey-2);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+.searchItem {
+  margin-bottom: 5px;
+
+  border: solid 2px var(--evergreen);
+  border-radius: 6px;
+  padding: 5px 10px;
+  background-color: var(--hunter-green);
+  color: var(--pale-sky);
+}
