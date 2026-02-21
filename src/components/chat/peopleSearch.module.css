@@ -1,3 +1,7 @@
+.searchContainer{
+    display: flex;
+    flex-direction: column;
+}
 .searchBar::placeholder {
   color: var(--grey-2);
 }
