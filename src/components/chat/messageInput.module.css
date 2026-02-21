@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  gap: 2px;
+
+  margin: 10px;
+}
+
+.messageInput {
+  flex: 1;
+}

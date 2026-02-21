@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import styles from "./messageInput.module.css";
 
 function MessageInput({ selectedConversationId, fetchMessages }) {
   const { token } = useAuth();
@@ -47,9 +48,10 @@ function MessageInput({ selectedConversationId, fetchMessages }) {
   }
 
   return (
-    <form onSubmit={onMessageSend}>
+    <form onSubmit={onMessageSend} className={styles.container}>
       {error && <p>{error}</p>}
       <input
+        className={styles.messageInput}
         type="text"
         value={message}
         onChange={(e) => {

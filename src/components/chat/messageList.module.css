@@ -14,14 +14,42 @@
   flex: 1;
   min-height: 0;
 
-  padding: 0;
+  padding: 16px;
 
   overflow-y: auto;
 }
-.message {
-  border: solid blueviolet 1px;
-  list-style-type: none;
+
+.messageWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  max-width: 70%;
 }
-.right {
+
+.rightWrapper {
   align-self: flex-end;
+  align-items: flex-end;
+}
+
+.messageDate {
+  font-size: 0.75rem;
+  color: var(--pale-sky);
+  margin-bottom: 4px;
+  opacity: 0.8;
+  padding: 0 4px;
+}
+
+.message {
+  list-style-type: none;
+
+  border-radius: 18px;
+  background-color: var(--ebony);
+
+  padding: 10px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: var(--pale-sky);
+}
+
+.right {
+  background-color: var(--hunter-green);
 }

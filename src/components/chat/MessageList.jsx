@@ -126,26 +126,41 @@ function MessageList({ selectedConversationId }) {
     <div className={styles.messageWindow}>
       {error && <p>{error}</p>}
       <ul className={styles.messageDisplay} ref={scrollRef}>
-        {messages.map((message) => (
-          <li
-            className={[
-              styles.message,
-              message.senderId === user.id ? styles.right : "",
-            ].join(" ")}
-            key={message.id}
-          >
-            {formatMessageDate(message.createdAt)} : {message.content}
-          </li>
-        ))}
+        {messages.map((message) => {
+          const isOwnMessage = message.senderId === user.id;
+          return (
+            <li
+              className={[
+                styles.messageWrapper,
+                isOwnMessage ? styles.rightWrapper : "",
+              ].join(" ")}
+              key={message.id}
+            >
+              <span className={styles.messageDate}>
+                {formatMessageDate(message.createdAt)}
+              </span>
+              <div
+                className={[
+                  styles.message,
+                  isOwnMessage ? styles.right : "",
+                ].join(" ")}
+              >
+                {message.content}
+              </div>
+            </li>
+          );
+        })}
         {loading && messages.length === 0 && <li>Loading...</li>}
       </ul>
 
-      <div>
-        <MessageInput
-          selectedConversationId={selectedConversationId}
-          fetchMessages={() => fetchMessages(true)}
-        />
-      </div>
+      {selectedConversationId && (
+        <div>
+          <MessageInput
+            selectedConversationId={selectedConversationId}
+            fetchMessages={() => fetchMessages(true)}
+          />
+        </div>
+      )}
     </div>
   );
 }
