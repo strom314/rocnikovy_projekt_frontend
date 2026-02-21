@@ -53,3 +53,17 @@
 .right {
   background-color: var(--hunter-green);
 }
+
+::-webkit-scrollbar {
+  background-color: rgba(0, 0, 0, 0);
+}
+/* ::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+} */
+::-webkit-scrollbar-thumb {
+  background: var(--evergreen);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(39, 56, 36, 0.8);
+}

@@ -117,7 +117,7 @@ function PeopleSearch({ onSelectConversation, setIsSearching }) {
   }
 
   return (
-    <div>
+    <div className={styles.searchContainer}>
       <input
         className={styles.searchBar}
         type="text"
