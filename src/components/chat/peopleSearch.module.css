@@ -1,10 +1,11 @@
-.searchContainer{
-    display: flex;
-    flex-direction: column;
+.searchContainer {
+  display: flex;
+  flex-direction: column;
 }
 .searchBar::placeholder {
   color: var(--grey-2);
 }
+
 
 ul {
   list-style-type: none;

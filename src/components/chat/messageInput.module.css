@@ -8,3 +8,6 @@
 .messageInput {
   flex: 1;
 }
+.messageInput:focus {
+  outline: none;
+}

@@ -27,6 +27,9 @@ input {
 input :autofill {
   background-color: hsla(185, 6%, 45%, 0.6);
 }
+input:focus {
+  outline: solid 1.5px var(--evergreen);
+}
 
 button {
   padding: 10px;
@@ -35,6 +38,16 @@ button {
   color: var(--pale-sky);
   background-color: var(--hunter-green);
   border: solid 2px var(--evergreen);
+
+  transition: 0.2s;
+}
+
+button:hover {
+  scale: 1.02;
+  background-color: rgb(57, 72, 49);
+}
+button:active {
+  scale: 0.95;
 }
 
 .loginPage {
